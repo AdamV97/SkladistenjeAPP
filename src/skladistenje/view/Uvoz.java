@@ -5,16 +5,26 @@
  */
 package skladistenje.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 import skladistenje.controller.Obrada;
 import skladistenje.model.Polica;
-import skladistenje.model.Red;
 import skladistenje.model.Roba;
 import skladistenje.pomocno.HibernateUtil;
+import skladistenje.pomocno.Pomocno;
 
 /**
  *
@@ -22,29 +32,25 @@ import skladistenje.pomocno.HibernateUtil;
  */
 public class Uvoz extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Uvoz
-     */
+    private Border obrub;
     private Obrada<Roba> obrada;
+    private NumberFormat nf;
+    private DecimalFormat df;
     
     public Uvoz() {
         initComponents();
        
         
+        nf=NumberFormat.getInstance(Pomocno.ZEMLJA);
+        df=(DecimalFormat) nf;
+        df.applyPattern(Pomocno.FORMAT_BROJA);
+        obrub = txtOznaka.getBorder();
         obrada = new Obrada<>();
         
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         
-        
-       List<Red> lista = HibernateUtil.getSession().createQuery(
-                "from Red a").list();
-        DefaultComboBoxModel<Red> m = new DefaultComboBoxModel<>();
-        for (Red red : lista) {
-            m.addElement(red);
-        }
-        
-        downRed.setModel(m);
+       
         
         dohvatiPolica();
     }
@@ -65,9 +71,7 @@ public class Uvoz extends javax.swing.JFrame {
         txtVrijednost = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtMasa = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        downRed = new javax.swing.JComboBox<>();
         downPolica = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,8 +89,6 @@ public class Uvoz extends javax.swing.JFrame {
 
         jLabel3.setText("Masa");
 
-        jLabel4.setText("Red");
-
         jLabel5.setText("Polica");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,36 +96,27 @@ public class Uvoz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(downPolica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUvezi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtOznaka, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                        .addComponent(txtVrijednost)
-                                        .addComponent(txtMasa))
-                                    .addComponent(jLabel5)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(btnUvezi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(downRed, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(downPolica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtOznaka, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                .addComponent(txtVrijednost)
+                                .addComponent(txtMasa))
+                            .addComponent(jLabel5))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtOznaka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,15 +128,11 @@ public class Uvoz extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(downRed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(downPolica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(btnUvezi, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -153,24 +142,42 @@ public class Uvoz extends javax.swing.JFrame {
 
 
     private void btnUveziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUveziActionPerformed
+        resetirajGreske();
+        if (!kontrola()) {
+        return;
+        }
         Roba r = new Roba();
         r = napuniObjekt(r);
         obrada.save(r);  
+        JOptionPane.showMessageDialog( null,"Uveženo!","",JOptionPane.INFORMATION_MESSAGE);
+        reset();
     }//GEN-LAST:event_btnUveziActionPerformed
 
     private Roba napuniObjekt(Roba r) {
         r.setOznaka(txtOznaka.getText());
-        r.setVrijednost(txtVrijednost.getText());
-        r.setMasa(txtMasa.getText());
+        try {
+            r.setVrijednost(new BigDecimal(df.parse(txtVrijednost.getText()).toString()));
+        } catch (ParseException ex) {
+            
+        }
+        try {
+            r.setMasa(new BigDecimal(df.parse(txtMasa.getText()).toString()));
+        } catch (ParseException ex) {
+              
+        }
         r.setPolica(downPolica.getItemAt(downPolica.getSelectedIndex()));
-        r.setRed(downRed.getItemAt(downRed.getSelectedIndex()));
         return r;
+    }
+    
+    private void oznaciGresku(JTextField polje) {
+        polje.setBorder(BorderFactory.createLineBorder(Color.decode("#FF0000")));
+        polje.requestFocus();
     }
     
     private void dohvatiPolica(){
  
                List<Polica> lista = HibernateUtil.getSession().createQuery(
-                "from Polica a").list();
+                " from Polica a ").list();
         DefaultComboBoxModel<Polica> p = new DefaultComboBoxModel<>();
         for (Polica polica : lista) {
             p.addElement(polica);
@@ -180,18 +187,58 @@ public class Uvoz extends javax.swing.JFrame {
         
     
 }
-   
     
+    private void resetirajGreske() {
+        txtOznaka.setBorder(obrub);
+        txtVrijednost.setBorder(obrub);
+        txtMasa.setBorder(obrub);
+    }
    
+    private boolean kontrola() {
+        if (txtOznaka.getText().trim().length() == 0) {
+            oznaciGresku(txtOznaka);
+            JOptionPane.showMessageDialog( null,"Obavezno unijeti naziv!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+
+        if (txtVrijednost.getText().trim().length() == 0) {
+            txtVrijednost.setText("0");
+        } else {
+            try {
+                
+                df.parse(txtVrijednost.getText());
+                
+            } catch (Exception e) {
+                oznaciGresku(txtVrijednost);
+                e.printStackTrace();
+                JOptionPane.showMessageDialog( null,"Unesena Vrijednost mora biti broj!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+            try {
+               df.parse(txtMasa.getText());
+        } catch (Exception e) {
+            oznaciGresku(txtMasa);
+            JOptionPane.showMessageDialog( null,"Unesena Masa mora biti broj!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        }
+        return true;
+
+    }
+    
+   private void reset() {
+   txtOznaka.setText(null);
+   txtVrijednost.setText(null);
+   txtMasa.setText(null); 
+   downPolica.setSelectedIndex(0);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUvezi;
     private javax.swing.JComboBox<Polica> downPolica;
-    private javax.swing.JComboBox<Red> downRed;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtMasa;
     private javax.swing.JTextField txtOznaka;

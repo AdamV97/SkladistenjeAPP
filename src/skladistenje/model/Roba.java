@@ -6,6 +6,7 @@
 package skladistenje.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,10 +24,9 @@ public class Roba implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private String masa;
+    private BigDecimal masa;
     private String oznaka;
-    private String vrijednost;
-    private Red red;
+    private BigDecimal vrijednost;
    
     @ManyToOne
     private Polica polica;
@@ -39,13 +39,6 @@ public class Roba implements Serializable {
         this.id = id;
     }
 
-    public String getMasa() {
-        return masa;
-    }
-
-    public void setMasa(String masa) {
-        this.masa = masa;
-    }
 
     public String getOznaka() {
         return oznaka;
@@ -55,11 +48,19 @@ public class Roba implements Serializable {
         this.oznaka = oznaka;
     }
 
-    public String getVrijednost() {
+    public BigDecimal getMasa() {
+        return masa;
+    }
+
+    public void setMasa(BigDecimal masa) {
+        this.masa = masa;
+    }
+
+    public BigDecimal getVrijednost() {
         return vrijednost;
     }
 
-    public void setVrijednost(String vrijednost) {
+    public void setVrijednost(BigDecimal vrijednost) {
         this.vrijednost = vrijednost;
     }
 
@@ -70,13 +71,9 @@ public class Roba implements Serializable {
     public void setPolica(Polica polica) {
         this.polica = polica;
     }
-    
-     public Red getRed() {
-        return red;
-    }
-
-    public void setRed(Red red) {
-        this.red = red;
+    @Override
+    public String toString() {
+        return getOznaka();
     }
     
 }

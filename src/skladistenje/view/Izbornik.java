@@ -49,6 +49,11 @@ public class Izbornik extends javax.swing.JFrame {
         });
 
         btnIspravi.setText("ISPRAVI");
+        btnIspravi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIspraviActionPerformed(evt);
+            }
+        });
 
         btnUvoz.setText("UVOZ");
         btnUvoz.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +114,7 @@ public class Izbornik extends javax.swing.JFrame {
     
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
 
-JOptionPane.showMessageDialog( null,"       Trgovina: \nIme: HyperX \nAdresa: tamodaleko2 \nTelefon: 0989898989898 ", "INFO",JOptionPane.INFORMATION_MESSAGE); 
+JOptionPane.showMessageDialog( null,"       Trgovina: \nIme:   HyperX \nAdresa: tamodaleko2 \nTelefon: 0989898989898 ", "INFO",JOptionPane.INFORMATION_MESSAGE); 
 
     }//GEN-LAST:event_btnInfoActionPerformed
 
@@ -120,6 +125,10 @@ JOptionPane.showMessageDialog( null,"       Trgovina: \nIme: HyperX \nAdresa: ta
     private void btnIzvozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzvozActionPerformed
         new Izvoz().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnIzvozActionPerformed
+
+    private void btnIspraviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIspraviActionPerformed
+       new Ispravi().setVisible(true);
+    }//GEN-LAST:event_btnIspraviActionPerformed
 
     /**
      * @param args the command line arguments
