@@ -15,9 +15,11 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import skladistenje.controller.Obrada;
 import skladistenje.model.Polica;
 import skladistenje.model.Roba;
@@ -26,7 +28,7 @@ import skladistenje.pomocno.Pomocno;
 
 
 public class Ispravi extends javax.swing.JFrame {
-    
+    private Border obrub;
     private NumberFormat nf;
     private DecimalFormat df;
     
@@ -35,6 +37,8 @@ public class Ispravi extends javax.swing.JFrame {
 
     public Ispravi() {
         initComponents();
+        dohvatiPolica();
+        ucitajPodatke();
         
         obrada = new Obrada<>();
         
@@ -183,16 +187,28 @@ public class Ispravi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIspraviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIspraviActionPerformed
-
+        
+        resetirajGreske();
+        
         Roba r = listaRobe.getSelectedValue();
         if (r == null) {
             JOptionPane.showMessageDialog( null,"Prvo odaberite smjer", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
             return;}
-
-        obrada.delete(r);
-
+        
+        r=napuniObjekt(r);
+        
+        if (!kontrola()) {
+        return;
+        }
+        
+        obrada.save(r);
+        
+        JOptionPane.showMessageDialog( null,"Uveženo!","",JOptionPane.INFORMATION_MESSAGE);        
+        
+        dohvatiPolica();
+       
         ucitajPodatke();
-
+        
         reset();
     }//GEN-LAST:event_btnIspraviActionPerformed
 
@@ -212,13 +228,16 @@ public class Ispravi extends javax.swing.JFrame {
         if (r == null) {
             return;
         }
-
+        
+        dohvatiPolica();
+        
         txtOznaka.setText(r.getOznaka());
 
         txtVrijednost.setText(df.format(r.getVrijednost()));
 
         txtMasa.setText(df.format(r.getMasa()));
-
+        
+        
 
 
     }//GEN-LAST:event_listaRobeValueChanged
@@ -269,21 +288,9 @@ private void reset() {
    txtTrazilica.setText(null);
 }
 
-private void upit(){
+private void trazilica(){
 
-        int odabir =JOptionPane.showConfirmDialog(null, 
-   "Sigurno?",null, JOptionPane.YES_NO_OPTION);
-    
-        if(odabir == JOptionPane.YES_OPTION);{
-        return;
-     }
-  }
-
- private void trazilica(){
-        if(txtTrazilica.getText().trim().length()==0){
-            JOptionPane.showMessageDialog(getRootPane(), "Obavezno uvjet pretraživanja");
-            return;
-        }
+        
          DefaultListModel<Roba> model = new DefaultListModel<>();
 
         List<Roba> listaRobe = HibernateUtil.getSession().createQuery(
@@ -297,23 +304,8 @@ private void upit(){
 
         this.listaRobe.setModel(model);
     }
- 
-  private Roba ispraviRoba(Roba r) {
-   r.setOznaka(txtOznaka.getText());
-        try {
-            r.setVrijednost(new BigDecimal(df.parse(txtVrijednost.getText()).toString()));
-        } catch (ParseException ex) {
-            
-        }
-        try {
-            r.setMasa(new BigDecimal(df.parse(txtMasa.getText()).toString()));
-        } catch (ParseException ex) {
-              
-        }
-        return r;      
-  }
-  
-  private boolean kontrola() {
+
+private boolean kontrola() {
         if (txtOznaka.getText().trim().length() == 0) {
             oznaciGresku(txtOznaka);
             JOptionPane.showMessageDialog( null,"Obavezno unijeti naziv!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
@@ -345,8 +337,46 @@ private void upit(){
 
     }
   
-  private void oznaciGresku(JTextField polje) {
+private void oznaciGresku(JTextField polje) {
         polje.setBorder(BorderFactory.createLineBorder(Color.decode("#FF0000")));
         polje.requestFocus();
+    }
+  
+private void dohvatiPolica(){
+ 
+               List<Polica> lista = HibernateUtil.getSession().createQuery(
+                " select a "
+                        + " from Polica a left outer join "
+                        + " a.robaNaPolici as roba where roba is null").list();
+        DefaultComboBoxModel<Polica> p = new DefaultComboBoxModel<>();
+        for (Polica polica : lista) {
+            p.addElement(polica);
+        }
+        
+        downPolica.setModel(p);
+        
+    
+}
+  
+private Roba napuniObjekt(Roba r) {
+         r.setOznaka(txtOznaka.getText());
+        try {
+            r.setVrijednost(new BigDecimal(df.parse(txtVrijednost.getText()).toString()));
+        } catch (ParseException ex) {
+            
+        }
+        try {
+            r.setMasa(new BigDecimal(df.parse(txtMasa.getText()).toString()));
+        } catch (ParseException ex) {
+              
+        }
+        r.setPolica(downPolica.getItemAt(downPolica.getSelectedIndex()));
+        return r;
+    }
+
+private void resetirajGreske() {
+        txtOznaka.setBorder(obrub);
+        txtVrijednost.setBorder(obrub);
+        txtMasa.setBorder(obrub);
     }
 }

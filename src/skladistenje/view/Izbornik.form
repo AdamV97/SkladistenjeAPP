@@ -23,20 +23,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnPregledRobe" max="32767" attributes="0"/>
-                  <Component id="btnSlobodniProstor" max="32767" attributes="0"/>
-                  <Component id="btnIspravi" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnIzvoz" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnUvoz" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="60" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="btnInfo" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnPregledRobe" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnIspravi" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnIzvoz" max="32767" attributes="0"/>
+                  <Component id="btnUvoz" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnIzgledSkladista" alignment="1" pref="167" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,10 +50,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnIspravi" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnSlobodniProstor" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnPregledRobe" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnIzgledSkladista" pref="42" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Component id="btnInfo" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -89,17 +89,20 @@
         <Property name="text" type="java.lang.String" value="PREGLED ROBE"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSlobodniProstor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="SLOBODNI PROSTOR"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnInfo">
       <Properties>
         <Property name="text" type="java.lang.String" value="INFO"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInfoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnIzgledSkladista">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="IZGLED SKLADI&#x160;TA"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIzgledSkladistaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

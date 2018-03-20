@@ -36,8 +36,8 @@ public class Izbornik extends javax.swing.JFrame {
         btnIspravi = new javax.swing.JButton();
         btnUvoz = new javax.swing.JButton();
         btnPregledRobe = new javax.swing.JButton();
-        btnSlobodniProstor = new javax.swing.JButton();
         btnInfo = new javax.swing.JButton();
+        btnIzgledSkladista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,8 +64,6 @@ public class Izbornik extends javax.swing.JFrame {
 
         btnPregledRobe.setText("PREGLED ROBE");
 
-        btnSlobodniProstor.setText("SLOBODNI PROSTOR");
-
         btnInfo.setText("INFO");
         btnInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,22 +71,29 @@ public class Izbornik extends javax.swing.JFrame {
             }
         });
 
+        btnIzgledSkladista.setText("IZGLED SKLADIŠTA");
+        btnIzgledSkladista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzgledSkladistaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPregledRobe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSlobodniProstor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnIspravi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnIzvoz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUvoz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnInfo))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPregledRobe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIspravi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIzvoz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUvoz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIzgledSkladista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,10 +105,10 @@ public class Izbornik extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnIspravi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSlobodniProstor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnPregledRobe, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnIzgledSkladista, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
                 .addComponent(btnInfo))
         );
 
@@ -130,6 +135,10 @@ JOptionPane.showMessageDialog( null,"       Trgovina: \nIme:   HyperX \nAdresa: 
        new Ispravi().setVisible(true);
     }//GEN-LAST:event_btnIspraviActionPerformed
 
+    private void btnIzgledSkladistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzgledSkladistaActionPerformed
+       new IzgledSkladista().setVisible(true);
+    }//GEN-LAST:event_btnIzgledSkladistaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -137,9 +146,9 @@ JOptionPane.showMessageDialog( null,"       Trgovina: \nIme:   HyperX \nAdresa: 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInfo;
     private javax.swing.JButton btnIspravi;
+    private javax.swing.JButton btnIzgledSkladista;
     private javax.swing.JButton btnIzvoz;
     private javax.swing.JButton btnPregledRobe;
-    private javax.swing.JButton btnSlobodniProstor;
     private javax.swing.JButton btnUvoz;
     // End of variables declaration//GEN-END:variables
 

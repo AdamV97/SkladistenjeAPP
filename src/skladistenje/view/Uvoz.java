@@ -150,6 +150,7 @@ public class Uvoz extends javax.swing.JFrame {
         r = napuniObjekt(r);
         obrada.save(r);  
         JOptionPane.showMessageDialog( null,"Uveženo!","",JOptionPane.INFORMATION_MESSAGE);
+        dohvatiPolica();
         reset();
     }//GEN-LAST:event_btnUveziActionPerformed
 
@@ -177,7 +178,9 @@ public class Uvoz extends javax.swing.JFrame {
     private void dohvatiPolica(){
  
                List<Polica> lista = HibernateUtil.getSession().createQuery(
-                " from Polica a ").list();
+                " select a "
+                        + " from Polica a left outer join "
+                        + " a.robaNaPolici as roba where roba is null").list();
         DefaultComboBoxModel<Polica> p = new DefaultComboBoxModel<>();
         for (Polica polica : lista) {
             p.addElement(polica);
@@ -214,6 +217,11 @@ public class Uvoz extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog( null,"Unesena Vrijednost mora biti broj!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
+        }
+            
+            if (txtMasa.getText().trim().length() == 0) {
+            txtMasa.setText("0");
+        } else {
             try {
                df.parse(txtMasa.getText());
         } catch (Exception e) {
@@ -221,10 +229,13 @@ public class Uvoz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog( null,"Unesena Masa mora biti broj!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        }
+        
         return true;
-
+            }
+            return true;
     }
+        
+    
     
    private void reset() {
    txtOznaka.setText(null);

@@ -8,10 +8,8 @@ package skladistenje.view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -227,7 +225,9 @@ public class Izvoz extends javax.swing.JFrame {
         if (r == null) {
             JOptionPane.showMessageDialog( null,"Prvo odaberite smjer", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
             return;}
-
+            
+        upit();
+        
         obrada.delete(r);
 
         ucitajPodatke();
@@ -286,15 +286,25 @@ private void reset() {
 }
 private void upit(){
 
-        int odabir =JOptionPane.showConfirmDialog(null, 
-   "Sigurno?",null, JOptionPane.YES_NO_OPTION);
-    
-        if(odabir == JOptionPane.YES_OPTION);{
-        return;
+      if(
+                JOptionPane.showConfirmDialog(
+                        getRootPane(), 
+                "Sigurno izvestii?", 
+                "Upit?", 
+                JOptionPane.YES_NO_OPTION)
+                
+                ==
+                
+                JOptionPane.YES_OPTION
+                
+                ){
+            JOptionPane.showMessageDialog(getRootPane(), "Izveženo");
+        }else{
+            JOptionPane.showMessageDialog(getRootPane(), "X");;
+        }
 }
   
-}
- private void trazilica(){
+private void trazilica(){
         if(txtTrazilica.getText().trim().length()==0){
             JOptionPane.showMessageDialog(getRootPane(), "Obavezno uvjet pretraživanja");
             return;
@@ -312,5 +322,10 @@ private void upit(){
 
         this.listaRobe.setModel(model);
     }
+
 }
+
+
+ 
+
 
