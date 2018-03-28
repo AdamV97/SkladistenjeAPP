@@ -45,6 +45,7 @@ public class Info extends javax.swing.JFrame {
         txtTelefon = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jLabel1.setText("Trgovina");
 
@@ -114,16 +115,8 @@ public class Info extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 private void info(){
 
-      DefaultListModel<Trgovina> model = new DefaultListModel<>();
 
-        List<Trgovina> lista = HibernateUtil.getSession().createQuery(
-                "from Trgovina a").list();
-
-        for (Trgovina t : lista) {
-            model.addElement(t);
-        }
         
-        Trgovina t = lista.get(WIDTH);
         
         txtAdresa.setText(t.getAdresa());
         txtTrgovina.setText(t.getIme());

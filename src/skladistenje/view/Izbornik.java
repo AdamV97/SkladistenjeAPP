@@ -71,6 +71,11 @@ public class Izbornik extends javax.swing.JFrame {
         });
 
         btnPregledRobe.setText("PREGLED ROBE");
+        btnPregledRobe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPregledRobeActionPerformed(evt);
+            }
+        });
 
         btnInfo.setText("INFO");
         btnInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -137,9 +142,7 @@ public class Izbornik extends javax.swing.JFrame {
     
     
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
-
-    new Info().setVisible(true);
-
+       new Info().setVisible(true);
     }//GEN-LAST:event_btnInfoActionPerformed
 
     private void btnUvozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUvozActionPerformed
@@ -157,6 +160,10 @@ public class Izbornik extends javax.swing.JFrame {
     private void btnIzgledSkladistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzgledSkladistaActionPerformed
        new IzgledSkladista().setVisible(true);
     }//GEN-LAST:event_btnIzgledSkladistaActionPerformed
+
+    private void btnPregledRobeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPregledRobeActionPerformed
+       new PregledRobe().setVisible(true);
+    }//GEN-LAST:event_btnPregledRobeActionPerformed
 
     /**
      * @param args the command line arguments

@@ -330,10 +330,8 @@ private void upit(){
 }
   
 private void trazilica(){
-        if(txtTrazilica.getText().trim().length()==0){
-            JOptionPane.showMessageDialog(getRootPane(), "Obavezno uvjet pretraživanja");
-            return;
-        }
+        
+        
          DefaultListModel<Roba> model = new DefaultListModel<>();
 
         List<Roba> listaRobe = HibernateUtil.getSession().createQuery(
