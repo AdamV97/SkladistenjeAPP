@@ -7,6 +7,11 @@ package skladistenje.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+import skladistenje.model.Roba;
+import skladistenje.pomocno.HibernateUtil;
 
 /**
  *
@@ -17,6 +22,21 @@ public class PregledRobe extends javax.swing.JFrame {
     public PregledRobe() {
         initComponents();
         
+        DefaultTableModel m = (DefaultTableModel)tblRoba.getModel();
+        
+        
+         List<Roba> lista = HibernateUtil.getSession().createQuery(
+                "from Roba a").list();
+         Object niz[]=new Object[4];
+        for (Roba r : lista) {
+           niz[0]= r.getOznaka();
+           niz[1]= r.getVrijednost();
+           niz[2]=r.getMasa();
+           niz[3]=r.getPolica();
+           m.addRow(niz);
+           
+           m.setValueAt(r, m.getRowCount()-1, 1);
+        }
         
        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 3);
@@ -28,7 +48,7 @@ public class PregledRobe extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        txtTrazilica = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnPovratak = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -39,6 +59,11 @@ public class PregledRobe extends javax.swing.JFrame {
         setUndecorated(true);
 
         jButton1.setText("Traži");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnPovratak.setBackground(java.awt.Color.white);
         btnPovratak.setForeground(new java.awt.Color(255, 0, 51));
@@ -54,31 +79,7 @@ public class PregledRobe extends javax.swing.JFrame {
 
         tblRoba.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Oznaka", "Vrijednost", "Masa", "Polica"
@@ -107,7 +108,7 @@ public class PregledRobe extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnPovratak, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTrazilica, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
@@ -120,7 +121,7 @@ public class PregledRobe extends javax.swing.JFrame {
                 .addComponent(btnPovratak, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTrazilica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,13 +135,43 @@ public class PregledRobe extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnPovratakActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      trazilica();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPovratak;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblRoba;
+    private javax.swing.JTextField txtTrazilica;
     // End of variables declaration//GEN-END:variables
+
+
+private void trazilica(){
+    DefaultTableModel m = (DefaultTableModel)tblRoba.getModel();
+        
+        
+         List<Roba> lista = HibernateUtil.getSession().createQuery(
+                "from Roba a where a.oznaka like :uvjet")
+                .setString("uvjet", "%" + txtTrazilica.getText().trim() + "%")
+                .list();
+         Object niz[]=new Object[4];
+        for (Roba r : lista) {
+           niz[0]= r.getOznaka();
+           niz[1]= r.getVrijednost();
+           niz[2]=r.getMasa();
+           niz[3]=r.getPolica();
+           
+           
+           m.setValueAt(r, m.getRowCount()-1, 1);
+        }
+
+    }
+
+
+
+
 }

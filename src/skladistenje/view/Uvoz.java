@@ -92,6 +92,12 @@ public class Uvoz extends javax.swing.JFrame {
 
         jLabel5.setText("Polica");
 
+        downPolica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downPolicaActionPerformed(evt);
+            }
+        });
+
         btnPovratak.setBackground(java.awt.Color.white);
         btnPovratak.setForeground(new java.awt.Color(255, 0, 51));
         btnPovratak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/skladistenje/view/left-arrow.jpg"))); // NOI18N
@@ -170,6 +176,10 @@ public class Uvoz extends javax.swing.JFrame {
     private void btnPovratakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPovratakActionPerformed
       dispose();
     }//GEN-LAST:event_btnPovratakActionPerformed
+
+    private void downPolicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downPolicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_downPolicaActionPerformed
 
     private Roba napuniObjekt(Roba r) {
         r.setOznaka(txtOznaka.getText());

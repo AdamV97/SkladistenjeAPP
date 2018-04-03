@@ -114,13 +114,13 @@ public class Info extends javax.swing.JFrame {
     private javax.swing.JTextField txtTrgovina;
     // End of variables declaration//GEN-END:variables
 private void info(){
-
+        
 
         
         
-        txtAdresa.setText(t.getAdresa());
-        txtTrgovina.setText(t.getIme());
-        txtTelefon.setText(t.getTelefon());
+       // txtAdresa.setText(t.getAdresa());
+        //txtTrgovina.setText(t.getIme());
+        //txtTelefon.setText(t.getTelefon());
 
 }
 
