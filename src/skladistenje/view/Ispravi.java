@@ -72,8 +72,6 @@ public class Ispravi extends javax.swing.JFrame {
         btnPovratak = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
-        setUndecorated(true);
 
         jMasa.setText("Masa");
 
@@ -173,8 +171,7 @@ public class Ispravi extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(2, 2, 2)
-                                .addComponent(txtTrazilica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(txtTrazilica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnTrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -212,7 +209,7 @@ public class Ispravi extends javax.swing.JFrame {
         
         Roba r = listaRobe.getSelectedValue();
         if (r == null) {
-            JOptionPane.showMessageDialog( null,"Prvo odaberite smjer", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog( null,"Prvo odaberite Robu", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
             return;}
         
         r=napuniObjekt(r);
@@ -223,7 +220,7 @@ public class Ispravi extends javax.swing.JFrame {
         
         obrada.save(r);
         
-        JOptionPane.showMessageDialog( null,"Uveženo!","",JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog( null,"Ispravljeno!","",JOptionPane.INFORMATION_MESSAGE);        
         
         dohvatiPolica();
        

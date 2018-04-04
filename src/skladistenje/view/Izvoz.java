@@ -68,9 +68,7 @@ public class Izvoz extends javax.swing.JFrame {
         btnPovratak = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setUndecorated(true);
 
         listaRobe.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -243,10 +241,8 @@ public class Izvoz extends javax.swing.JFrame {
 
         Roba r = listaRobe.getSelectedValue();
         if (r == null) {
-            JOptionPane.showMessageDialog( null,"Prvo odaberite smjer", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog( null,"Prvo odaberite Robu!", "GREŠKA",JOptionPane.INFORMATION_MESSAGE);
             return;}
-            
-        upit();
         
         obrada.delete(r);
 
@@ -309,26 +305,6 @@ private void reset() {
    txtPolica.setText(null);
    txtTrazilica.setText(null);
 }
-private void upit(){
-
-      if(
-                JOptionPane.showConfirmDialog(
-                        getRootPane(), 
-                "Sigurno izvestii?", 
-                "Upit?", 
-                JOptionPane.YES_NO_OPTION)
-                
-                ==
-                
-                JOptionPane.YES_OPTION
-                
-                ){
-            JOptionPane.showMessageDialog(getRootPane(), "Izveženo");
-        }else{
-            return;
-        }
-}
-  
 private void trazilica(){
         
         

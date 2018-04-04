@@ -28,7 +28,7 @@ public class Info extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 3);
         
-       
+       info();
          }
 
     
@@ -114,14 +114,13 @@ public class Info extends javax.swing.JFrame {
     private javax.swing.JTextField txtTrgovina;
     // End of variables declaration//GEN-END:variables
 private void info(){
+ 
+    List<Trgovina> lista = HibernateUtil.getSession().createQuery(
+                "from Trgovina").list();
         
-
-        
-        
-       // txtAdresa.setText(t.getAdresa());
-        //txtTrgovina.setText(t.getIme());
-        //txtTelefon.setText(t.getTelefon());
-
+        txtAdresa.setText(lista.get(0).getAdresa());
+        txtTrgovina.setText(lista.get(0).getIme());
+        txtTelefon.setText(lista.get(0).getTelefon());
 }
 
 

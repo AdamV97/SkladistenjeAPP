@@ -29,7 +29,7 @@ import skladistenje.pomocno.Pomocno;
  * @author Adam
  */
 public class Uvoz extends javax.swing.JFrame {
-
+  
     private Border obrub;
     private Obrada<Roba> obrada;
     private NumberFormat nf;
@@ -38,7 +38,7 @@ public class Uvoz extends javax.swing.JFrame {
     public Uvoz() {
         initComponents();
        
-        
+     
         nf=NumberFormat.getInstance(Pomocno.ZEMLJA);
         df=(DecimalFormat) nf;
         df.applyPattern(Pomocno.FORMAT_BROJA);
@@ -74,8 +74,6 @@ public class Uvoz extends javax.swing.JFrame {
         btnPovratak = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
-        setUndecorated(true);
 
         btnUvezi.setText("Uvezi");
         btnUvezi.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +215,8 @@ public class Uvoz extends javax.swing.JFrame {
         
     
 }
+    
+    
     
     private void resetirajGreske() {
         txtOznaka.setBorder(obrub);

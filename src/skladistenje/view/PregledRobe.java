@@ -22,20 +22,22 @@ public class PregledRobe extends javax.swing.JFrame {
     public PregledRobe() {
         initComponents();
         
-        DefaultTableModel m = (DefaultTableModel)tblRoba.getModel();
+         DefaultTableModel m = (DefaultTableModel)tblRoba.getModel();
         
         
          List<Roba> lista = HibernateUtil.getSession().createQuery(
-                "from Roba a").list();
+                "from Roba").list();
          Object niz[]=new Object[4];
-        for (Roba r : lista) {
-           niz[0]= r.getOznaka();
-           niz[1]= r.getVrijednost();
+        
+         for (Roba r : lista) {
+           niz[0]=r.getOznaka();
+           niz[1]=r.getVrijednost();
            niz[2]=r.getMasa();
            niz[3]=r.getPolica();
+          
            m.addRow(niz);
-           
            m.setValueAt(r, m.getRowCount()-1, 1);
+
         }
         
        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,8 +57,6 @@ public class PregledRobe extends javax.swing.JFrame {
         tblRoba = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
-        setUndecorated(true);
 
         jButton1.setText("Traži");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +151,11 @@ public class PregledRobe extends javax.swing.JFrame {
 
 
 private void trazilica(){
+    
+    
     DefaultTableModel m = (DefaultTableModel)tblRoba.getModel();
         
+            m.setRowCount(0);
         
          List<Roba> lista = HibernateUtil.getSession().createQuery(
                 "from Roba a where a.oznaka like :uvjet")
@@ -165,7 +168,7 @@ private void trazilica(){
            niz[2]=r.getMasa();
            niz[3]=r.getPolica();
            
-           
+           m.addRow(niz);
            m.setValueAt(r, m.getRowCount()-1, 1);
         }
 
