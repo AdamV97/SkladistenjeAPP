@@ -8,8 +8,6 @@ package skladistenje.view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import skladistenje.model.Roba;
 import skladistenje.model.Trgovina;
 import skladistenje.pomocno.HibernateUtil;
 
@@ -50,14 +48,20 @@ public class Info extends javax.swing.JFrame {
         jLabel1.setText("Trgovina");
 
         txtTrgovina.setEditable(false);
+        txtTrgovina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtTrgovina.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel2.setText("Adresa");
 
         txtAdresa.setEditable(false);
+        txtAdresa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtAdresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel3.setText("Telefon");
 
         txtTelefon.setEditable(false);
+        txtTelefon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtTelefon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +101,7 @@ public class Info extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();

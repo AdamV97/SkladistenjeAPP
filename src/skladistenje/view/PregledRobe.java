@@ -36,7 +36,7 @@ public class PregledRobe extends javax.swing.JFrame {
            niz[3]=r.getPolica();
           
            m.addRow(niz);
-           m.setValueAt(r, m.getRowCount()-1, 1);
+           m.setValueAt(r, m.getRowCount()-1, 0);
 
         }
         
@@ -169,7 +169,7 @@ private void trazilica(){
            niz[3]=r.getPolica();
            
            m.addRow(niz);
-           m.setValueAt(r, m.getRowCount()-1, 1);
+           m.setValueAt(r, m.getRowCount()-1, 0);
         }
 
     }
