@@ -61,6 +61,13 @@ public class Izbornik extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusable(false);
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         btnIzvoz.setText("IZVOZ");
         btnIzvoz.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -189,6 +196,10 @@ public class Izbornik extends javax.swing.JFrame {
     private void btnPregledRobeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPregledRobeActionPerformed
        new PregledRobe().setVisible(true);
     }//GEN-LAST:event_btnPregledRobeActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+     graf();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
